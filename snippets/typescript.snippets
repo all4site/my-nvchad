@@ -1,0 +1,20 @@
+extends javascript
+
+snippet hello 'hello'
+    export default function Hamburger({ cb, show, className }: IMobileMenuProps) {
+      return (
+        <div
+          className={classNames(
+            'hamburger hamburger--slider !m-0 !p-0 !grid',
+            { 'is-active': show },
+            className
+          )}
+          onClick={cb}
+        >
+          <div className='hamburger-box'>
+            <div className='hamburger-inner !h-2 before:!h-2 after:!h-2' />
+          </div>
+        </div>
+      )
+    }
+
