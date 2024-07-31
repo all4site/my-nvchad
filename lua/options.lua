@@ -11,6 +11,11 @@ vim.opt.timeoutlen = 500
 vim.opt.cursorline = true -- highlight the current line
 vim.opt.termguicolors = true
 vim.o.cursorlineopt = "both"
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.smartindent = true
 
 vim.cmd(
   [[
