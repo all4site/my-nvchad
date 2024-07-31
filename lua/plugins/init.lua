@@ -1,3 +1,4 @@
+local lazy = require "lazy"
 return {
   {
     "stevearc/conform.nvim",
@@ -73,6 +74,10 @@ return {
   {
     "folke/trouble.nvim",
     lazy = false,
+    cmd = { "TroubleToggle", "Trouble" },
+    config = function()
+      require("trouble").setup {}
+    end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
@@ -93,9 +98,19 @@ return {
   },
   {
     "numToStr/Comment.nvim",
-    lazy = false,
+    lazy = "VeryLazy",
+    cmd = { "CommentToggle", "Comment" },
     config = function()
-      require("Comment").setup {}
+      require("Comment").setup({
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      })
     end,
   },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = { "tsx" },
+    },
+    dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+  }
 }

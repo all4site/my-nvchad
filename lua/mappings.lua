@@ -1,17 +1,32 @@
 require "nvchad.mappings"
 
 local map = vim.keymap.set
+local nomap = vim.keymap.del
 
+-- Basic
+
+nomap('n', '<leader>x')
+
+map("i", "jk", "<ESC>")
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<leader>w", "<cmd>w<CR>", { desc = "Save" })
+map("n", "<leader>c", ":bp|sp|bn|bd<CR>", { desc = 'Buffer close', silent = true })
 map("n", "<leader>cx", function()
   require("nvchad.tabufline").closeAllBufs()
 end, { desc = "Close All Buffers" })
 
-map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Find Todo" })
 map("n", "<leader>q", ":q|q<CR>", { desc = "Quit" })
 map("v", "<Tab>", ">gv", { silent = true, desc = "Indent" })
 map("v", "<S-Tab>", "<gv", { silent = true, desc = "Dedent" })
+
+-- Trouble
+
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { desc = "Open Trouble" })
+map("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "Open Workspace Trouble" })
+map("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<CR>", { desc = "Open Document Trouble" })
+map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<CR>", { desc = "Open Quickfix" })
+map("n", "<leader>xl", "<cmd>TroubleToggle loclist<CR>", { desc = "Open Location List" })
+map("n", "<leader>xt", "<cmd>TodoTrouble<CR>", { desc = "Open Todo Trouble" })
 
 -- Comment
 map("n", "<leader>/", function()
@@ -38,15 +53,6 @@ map("n", "<leader>o", "<cmd>NvimTreeFocus<CR>", { desc = "NvimTree focus" })
 -- Hop
 map("n", "<leader>h", "<cmd>HopWord<cr>", { desc = "Hop word" })
 
--- Trouble
-
-map("n", "<leader>qx", "<cmd>TroubleToggle<CR>", { desc = "Open Trouble" })
-map("n", "<leader>qw", "<cmd>TroubleToggle workspace_diagnostics<CR>", { desc = "Open Workspace Trouble" })
-map("n", "<leader>qd", "<cmd>TroubleToggle document_diagnostics<CR>", { desc = "Open Document Trouble" })
-
-map("n", "<leader>qq", "<cmd>TroubleToggle quickfix<CR>", { desc = "Open Quickfix" })
-map("n", "<leader>ql", "<cmd>TroubleToggle loclist<CR>", { desc = "Open Location List" })
-map("n", "<leader>qt", "<cmd>TodoTrouble<CR>", { desc = "Open Todo Trouble" })
 
 -- Git
 map("n", "<leader>gl", ":Flog<CR>", { desc = "Git Log" })
@@ -73,10 +79,3 @@ end, { desc = "Toogle Terminal Horizontal" })
 map("t", "<C-f>", function()
   require("nvchad.term").toggle { pos = "float" }
 end, { desc = "Toogle Terminal Float" })
-
--- Basic
-
-map("i", "jk", "<ESC>")
--- map("i", "<C-g>", function()
---   return vim.fn["codeium#Accept"]()
--- end, { expr = true })
