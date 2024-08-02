@@ -5,27 +5,24 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 local my_on_attach = require("configs.overraid").on_attach
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-
 local lspconfig = require "lspconfig"
 local servers = {
-    "html",
-    "cssls",
-    "tsserver",
-    "somesass_ls",
-    "css_variables",
+  "html",
+  "cssls",
+  -- "tsserver",
+  "somesass_ls",
+  "css_variables",
 }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-        on_attach = my_on_attach,
-        on_init = on_init,
-        capabilities = capabilities,
-    }
+  lspconfig[lsp].setup {
+    on_attach = my_on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
+    vim.diagnostic.config {
+      on_insert = false,
+      virtual_text = false,
+    },
+  }
 end
-
--- lspconfig.tsserver.setup {
---     on_attach = on_attach,
---     on_init = on_init,
---     capabilities = capabilities,
--- }
